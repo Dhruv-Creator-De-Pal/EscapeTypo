@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "Typer-Practice"
+name = "EscapeTypo"
 version = "0.1.0"
 dependencies = [
  "bincode",

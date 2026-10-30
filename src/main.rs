@@ -124,23 +124,26 @@ fn select_pdf_path(initial_path: Option<&str>) -> Option<String> {
                     .split(area);
 
                 let logo = Paragraph::new(vec![
-                    Line::from(Span::styled(
-                        "  TYPER",
-                        Style::default()
-                            .fg(Color::Cyan)
-                            .add_modifier(Modifier::BOLD),
-                    )),
-                    Line::from(Span::styled(
-                        "  PRACTICE",
-                        Style::default()
-                            .fg(Color::Blue)
-                            .add_modifier(Modifier::BOLD),
-                    )),
+                    Line::from(vec![
+                        Span::styled(
+                            "  ESCAPE",
+                            Style::default()
+                                .fg(Color::Cyan)
+                                .add_modifier(Modifier::BOLD),
+                        ),
+                        Span::styled(
+                            "TYPO",
+                            Style::default()
+                                .fg(Color::Blue)
+                                .add_modifier(Modifier::BOLD),
+                        ),
+                    ]),
+                    Line::from(""),
                 ])
                 .alignment(Alignment::Center);
                 frame.render_widget(logo, vertical[1]);
 
-                let prompt = Paragraph::new("Choose a PDF to practice")
+                let prompt = Paragraph::new("Choose a PDF to practise")
                     .style(Style::default().fg(Color::White).add_modifier(Modifier::BOLD))
                     .alignment(Alignment::Center);
                 frame.render_widget(prompt, vertical[2]);
