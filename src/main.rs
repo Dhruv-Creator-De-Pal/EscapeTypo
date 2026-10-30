@@ -87,7 +87,7 @@ fn select_pdf_path(initial_path: Option<&str>) -> Option<String> {
                         Constraint::Min(2),
                         Constraint::Length(7),
                         Constraint::Length(3),
-                        Constraint::Length(2),
+                        Constraint::Length(3),
                         Constraint::Min(2),
                     ])
                     .split(area);
