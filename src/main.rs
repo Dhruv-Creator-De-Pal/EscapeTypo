@@ -51,6 +51,37 @@ fn get_sentences(path_to_the_file: &str) -> Result<Vec<String>, String> {
     Ok(sentence)
 }
 
+const CHARS_PER_WORD: f64 = 5.0;
+const MAX_REASONABLE_WPM: u64 = 400;
+
+fn accuracy_percent(typed_chars: &[char], target: &str) -> u64 {
+    if typed_chars.is_empty() {
+        return 0;
+    }
+    let correct_count = typed_chars
+        .iter()
+        .zip(target.chars())
+        .filter(|(typed_char, target_char)| **typed_char == *target_char)
+        .count();
+    ((correct_count as f64 / typed_chars.len() as f64) * 100.0)
+        .round()
+        .clamp(0.0, 100.0) as u64
+}
+
+fn words_per_minute(typed_chars: &[char], elapsed: Duration) -> u64 {
+    let seconds = elapsed.as_secs_f64();
+    if typed_chars.is_empty() || seconds <= 0.0 {
+        return 0;
+    }
+    let words = typed_chars.len() as f64 / CHARS_PER_WORD;
+    let minutes = seconds / 60.0;
+    let wpm = words / minutes;
+    if !wpm.is_finite() {
+        return 0;
+    }
+    wpm.round().clamp(0.0, MAX_REASONABLE_WPM as f64) as u64
+}
+
 fn validate_pdf_path(path: &str) -> Result<(), String> {
     let trimmed_path = path.trim();
     if trimmed_path.is_empty() {
@@ -193,13 +224,12 @@ fn start_TUI(
     let mut terminal = Terminal::new(backend).expect("Failed to create terminal");
     let mut face_frame = 0usize;
     let mut typed_chars: Vec<char> = Vec::new();
-    let mut total_typed_chars = 0usize;
     let mut batch_start = current_batch.min(sentences.len());
     let mut personal_best = personal_best;
     let mut latest_speed = saved_speed;
     let mut latest_accuracy = saved_accuracy;
     let ghost_speed = personal_best;
-    let start_time = Instant::now();
+    let mut batch_start_time = Instant::now();
     let mut ghost_batch_start = Instant::now();
     let face_frames = [
         "(•ᴗ•)",
@@ -375,29 +405,19 @@ fn start_TUI(
         let batch_end = (batch_start + 4).min(sentences.len());
         let text = sentences[batch_start..batch_end].join("\n");
 
-        let correct_count = typed_chars
-            .iter()
-            .zip(text.chars())
-            .filter(|(typed_char, target_char)| **typed_char == *target_char)
-            .count();
         let accuracy = if typed_chars.is_empty() {
-            saved_accuracy
+            latest_accuracy
         } else {
-            correct_count
-                .saturating_mul(100)
-                .checked_div(typed_chars.len())
-                .unwrap_or(0)
-                .clamp(0, 100) as u64
+            accuracy_percent(&typed_chars, &text)
         };
-        let elapsed_minutes = start_time.elapsed().as_secs_f64() / 60.0;
-        let speed = if total_typed_chars == 0 || elapsed_minutes == 0.0 {
-            saved_speed
+        let batch_elapsed = batch_start_time.elapsed();
+        let speed = if typed_chars.is_empty() || batch_elapsed.as_secs_f64() < 1.0 {
+            latest_speed
         } else {
-            ((total_typed_chars as f64 / 5.0) / elapsed_minutes) as u64
+            words_per_minute(&typed_chars, batch_elapsed)
         };
         latest_accuracy = accuracy;
         latest_speed = speed;
-        personal_best = personal_best.max(speed);
         let text_character_count = text.chars().filter(|character| *character != '\n').count();
         let ghost_characters_per_second = ghost_speed as f64 * 5.0 / 60.0;
         let ghost_position = if text_character_count == 0 || ghost_characters_per_second == 0.0 {
@@ -545,12 +565,10 @@ fn start_TUI(
                     // Capture the character from the user input in real time.
                     KeyCode::Char(c) => {
                         typed_chars.push(c);
-                        total_typed_chars += 1;
                         face_frame = (face_frame + 1) % face_frames.len();
                     }
                     KeyCode::Enter => {
                         typed_chars.push('\n');
-                        total_typed_chars += 1;
                         face_frame = (face_frame + 1) % face_frames.len();
                     }
                     _ => {}
@@ -558,8 +576,14 @@ fn start_TUI(
             }
         }
         if typed_chars.len() >= text.chars().count() {
+            let final_speed = words_per_minute(&typed_chars, batch_start_time.elapsed());
+            let final_accuracy = accuracy_percent(&typed_chars, &text);
+            latest_speed = final_speed;
+            latest_accuracy = final_accuracy;
+            personal_best = personal_best.max(final_speed);
             typed_chars.clear();
             batch_start = batch_end;
+            batch_start_time = Instant::now();
             ghost_batch_start = Instant::now();
         }
     }
