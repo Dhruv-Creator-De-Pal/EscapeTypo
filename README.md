@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F172A,50:1D4ED8,100:22D3EE&height=220&section=header&text=Typer%20Practice&fontSize=58&fontColor=F8FAFC&animation=fadeIn&desc=A%20focused%20typing%20practice%20for%20your%20PDFs&descSize=18&descAlignY=64&fontAlignY=38" alt="EscapeTypo" width="100%">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F172A,50:1D4ED8,100:22D3EE&height=220&section=header&text=EscapeTypo&fontSize=58&fontColor=F8FAFC&animation=fadeIn&desc=A%20focused%20typing%20practice%20for%20your%20PDFs&descSize=18&descAlignY=64&fontAlignY=38" alt="EscapeTypo" width="100%">
 </div>
 
 <p align="center">
