@@ -16,9 +16,20 @@
   <img alt="Progress saved" src="https://img.shields.io/badge/PROGRESS-SAVED-a78bfa?style=for-the-badge&labelColor=0b1220">
 </p>
 
+<p align="center">
+  <a href="#getting-started"><img src="https://img.shields.io/badge/START%20A%20SESSION-1D4ED8?style=for-the-badge&logo=rocket&logoColor=white" alt="Start a session"></a>
+  <a href="#what-you-can-do"><img src="https://img.shields.io/badge/BUILD%20YOUR%20SPEED-0E7490?style=for-the-badge&logo=target&logoColor=white" alt="Build your speed"></a>
+</p>
+
 ## About
 
 EscapeTypo turns a PDF into short typing batches inside your terminal. Use your own books, notes or papers, type the words you have chosen, and watch your speed and accuracy change. Once you set a personal best, a ghost marker moves at that pace, giving you something to chase.
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3200&pause=900&color=67E8F9&center=true&vCenter=true&width=720&lines=Turn+reading+time+into+typing+time.;Make+every+session+feel+measurable.;Keep+your+practice+focused+and+personal." alt="Turn reading time into typing time.">
+</p>
+
+> **Read with purpose. Type with focus. Improve one session at a time.**
 
 ## See it in action
 
@@ -58,11 +69,13 @@ You will need a terminal and a PDF with selectable text.
 
 When you press Esc, EscapeTypo saves your current batch, your best speed and your latest stats on your computer. Open the same PDF again, and you can continue from the batch you were working on.
 
-## A small note
+## Project status
 
-I have left the timer part unchecked in case you want to add contribution and add Open Source contribution to resume this might help you 
+The timer experience is still being refined. Suggestions, improvements and open-source contributions are welcome as the project continues to grow.
 
-Thank you
+## Windows build availability
+
+Windows builds are currently available as unsigned development builds. This keeps the project easy to try while the release and signing process is being prepared. Depending on your Windows security settings, you may see an unknown-publisher or SmartScreen notice when opening a build. An official signed GitHub Release will be provided when that process is complete.
 
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:22D3EE,50:1D4ED8,100:0F172A&height=140&section=footer&text=Read.%20Type.%20Repeat.&fontSize=28&fontColor=F8FAFC&animation=twinkling" alt="Read. Type. Repeat." width="100%">
