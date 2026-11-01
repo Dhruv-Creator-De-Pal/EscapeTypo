@@ -17,13 +17,26 @@
 </p>
 
 <p align="center">
+  <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Built%20with-Rust-000000?style=flat-square&logo=rust&logoColor=white" alt="Built with Rust"></a>
+  <img src="https://img.shields.io/badge/Version-0.1.0-1d4ed8?style=flat-square" alt="Version 0.1.0">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square" alt="MIT License"></a>
+  <img src="https://img.shields.io/badge/Status-Development-f59e0b?style=flat-square" alt="Development status">
+  <img src="https://img.shields.io/badge/Platforms-Linux%20%7C%20Windows-0e7490?style=flat-square" alt="Linux and Windows">
+</p>
+
+<p align="center">
   <a href="#getting-started"><img src="https://img.shields.io/badge/START%20A%20SESSION-1D4ED8?style=for-the-badge&logo=rocket&logoColor=white" alt="Start a session"></a>
   <a href="#what-you-can-do"><img src="https://img.shields.io/badge/BUILD%20YOUR%20SPEED-0E7490?style=for-the-badge&logo=target&logoColor=white" alt="Build your speed"></a>
 </p>
 
+<p align="center">
+  <strong>Escape the slop. Enter the focus.</strong><br>
+  A quiet, local-first typing practice for people who want to turn reading into steady, measurable improvement.
+</p>
+
 ## About
 
-EscapeTypo turns a PDF into short typing batches inside your terminal. Use your own books, notes or papers, type the words you have chosen, and watch your speed and accuracy change. Once you set a personal best, a ghost marker moves at that pace, giving you something to chase.
+EscapeTypo turns a PDF into short typing batches inside your terminal. Use your own books, notes or papers, type the words you have chosen, and watch your speed and accuracy change. Once you set a personal best, a ghost marker moves at that pace, giving each session a clear target.
 
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3200&pause=900&color=67E8F9&center=true&vCenter=true&width=720&lines=Turn+reading+time+into+typing+time.;Make+every+session+feel+measurable.;Keep+your+practice+focused+and+personal." alt="Turn reading time into typing time.">
@@ -31,7 +44,23 @@ EscapeTypo turns a PDF into short typing batches inside your terminal. Use your 
 
 > **Read with purpose. Type with focus. Improve one session at a time.**
 
+## Why EscapeTypo
+
+That focused loop is designed to stay simple. EscapeTypo keeps the practice close to your own material instead of adding another feed, account or recurring distraction.
+
+| Focus | EscapeTypo |
+| :--- | :--- |
+| Distractions | No ads or algorithmic feed |
+| Privacy | Your PDFs stay on your computer |
+| Cost | No monthly subscription required |
+| Practice | Type from the material you already want to read |
+| Platforms | Linux and Windows development builds |
+
+In short: no account, no upload and no clutter—just a focused loop of **read, type, learn and improve**.
+
 ## See it in action
+
+The short demonstration below shows that loop in practice: choose a PDF, type through a batch, and continue from where you left off.
 
 <p align="center">
   <img src="assets/demo.gif" alt="A short session of EscapeTypo: a PDF is opened, lines are typed, and the speed and accuracy change as the ghost marker moves" width="100%">
@@ -58,12 +87,12 @@ EscapeTypo turns a PDF into short typing batches inside your terminal. Use your 
 
 ## Getting started
 
-1. Open the project in a terminal.
-2. Start EscapeTypo.
+1. Make sure Rust and Cargo are installed.
+2. Open the project in a terminal and start EscapeTypo with `cargo run --release`.
 3. Enter the path to a PDF and press Enter.
 4. Begin typing the words shown on the screen.
 
-You will need a terminal and a PDF with selectable text.
+You will need a terminal and a PDF with selectable text. For development setup and contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Saving your progress
 
