@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Render the original EscapeTypo product trailer with FFmpeg.
-
-The trailer uses only FFmpeg-generated color, geometry, and text. It has a
-silent audio track so players treat the result as a normal MP4 presentation.
-"""
+"""Render the EscapeTypo product trailer as a GIF with FFmpeg."""
 
 from __future__ import annotations
 
@@ -13,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "assets" / "escape-typo-trailer.mp4"
+OUTPUT = ROOT / "assets" / "demo.gif"
 FFMPEG = shutil.which("ffmpeg") or "ffmpeg"
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 MONO = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
@@ -32,7 +28,7 @@ def text(text: str, x: str, y: str, size: int, start: float, end: float,
 
 
 def build_filter() -> str:
-    # Six short beats: problem, promise, product, platform/privacy, learning,
+    # Six short beats: problem, promise, product, privacy, learning,
     # and the final call to action. All timing is deterministic and loopable.
     parts = [
         "drawbox=x=0:y=0:w=iw:h=ih:color=0x08111f:t=fill",
@@ -57,13 +53,13 @@ def build_filter() -> str:
         text("NO ADS.", "220", "335", 60, 12.35, 16, MONO, "0x67e8f9"),
         text("NO MONTHLY FEE.", "220", "440", 60, 12.7, 16, MONO, "0x67e8f9"),
         text("NO DATA LEAKING.", "220", "545", 60, 13.05, 16, MONO, "0x67e8f9"),
-        # 16–20: platform and privacy
+        # 16–20: privacy and local practice
         text("YOUR PDFs STAY YOURS.", "(w-text_w)/2", "280", 76, 16, 20, color="0xF8FAFC"),
-        text("LINUX  +  WINDOWS", "(w-text_w)/2", "430", 52, 16.5, 20, MONO, "0x67e8f9"),
+        text("ESCAPETYPO", "(w-text_w)/2", "430", 52, 16.5, 20, MONO, "0x67e8f9"),
         text("No account. No upload. Just practice.", "(w-text_w)/2", "560", 34, 17.1, 20),
         # 20–24: close
         text("TYPE. LEARN. IMPROVE.", "(w-text_w)/2", "285", 84, 20, 24, MONO, "0x67e8f9"),
-        text("PAY ONCE. USE FOREVER.", "(w-text_w)/2", "430", 60, 20.5, 24),
+        text("READ. TYPE. REPEAT.", "(w-text_w)/2", "430", 60, 20.5, 24),
         text("Enter focus.", "(w-text_w)/2", "650", 38, 21.3, 24, MONO, "0xa7f3d0"),
         "drawbox=x='(t-20)*860':y=760:w=220:h=8:color=0x22d3ee:t=fill",
     ]
@@ -76,12 +72,9 @@ def main() -> None:
         FFMPEG, "-y", "-hide_banner", "-loglevel", "error",
         "-f", "lavfi", "-i",
         "color=c=0x08111f:s=1920x1080:r=30:d=24",
-        "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
-        "-filter_complex", f"[0:v]{build_filter()}[v]",
-        "-map", "[v]", "-map", "1:a", "-t", "24",
-        "-c:v", "libx264", "-preset", "medium", "-crf", "20",
-        "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k",
-        "-movflags", "+faststart", str(OUTPUT),
+        "-filter_complex", f"[0:v]{build_filter()},fps=12,split[s0][s1];"
+        "[s0]palettegen=stats_mode=diff[p];[s1][p]paletteuse=dither=sierra2_4a[v]",
+        "-map", "[v]", "-t", "24", "-loop", "0", str(OUTPUT),
     ]
     subprocess.run(cmd, check=True)
     print(f"wrote {OUTPUT} ({OUTPUT.stat().st_size} bytes)")

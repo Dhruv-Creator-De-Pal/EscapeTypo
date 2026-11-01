@@ -19,9 +19,8 @@
 <p align="center">
   <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Built%20with-Rust-000000?style=flat-square&logo=rust&logoColor=white" alt="Built with Rust"></a>
   <img src="https://img.shields.io/badge/Version-0.1.0-1d4ed8?style=flat-square" alt="Version 0.1.0">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/Status-Development-f59e0b?style=flat-square" alt="Development status">
-  <img src="https://img.shields.io/badge/Platforms-Linux%20%7C%20Windows-0e7490?style=flat-square" alt="Linux and Windows">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-22c55e?style=flat-square" alt="Apache-2.0 License"></a>
+  <img src="https://img.shields.io/badge/Status-Accepting%20Contributions-f59e0b?style=flat-square" alt="Accepting contributions">
 </p>
 
 <p align="center">
@@ -36,7 +35,7 @@
 
 ## About
 
-EscapeTypo turns a PDF into short typing batches inside your terminal. Use your own books, notes or papers, type the words you have chosen, and watch your speed and accuracy change. Once you set a personal best, a ghost marker moves at that pace, giving each session a clear target.
+EscapeTypo turns a PDF into short typing batches inside your terminal. Use your own books, notes or papers, type the extracted text, and watch your speed and accuracy change. Once you set a personal best, a ghost marker moves at that pace, giving each session a clear target.
 
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3200&pause=900&color=67E8F9&center=true&vCenter=true&width=720&lines=Turn+reading+time+into+typing+time.;Make+every+session+feel+measurable.;Keep+your+practice+focused+and+personal." alt="Turn reading time into typing time.">
@@ -54,7 +53,7 @@ That focused loop is designed to stay simple. EscapeTypo keeps the practice clos
 | Privacy | Your PDFs stay on your computer |
 | Cost | No monthly subscription required |
 | Practice | Type from the material you already want to read |
-| Platforms | Linux and Windows development builds |
+| Distribution | Build locally from source with Cargo |
 
 In short: no account, no upload and no clutter—just a focused loop of **read, type, learn and improve**.
 
@@ -74,14 +73,14 @@ The short demonstration below shows that loop in practice: choose a PDF, type th
 - Work through the document four lines at a time.
 - See your speed and accuracy update as you type.
 - Race a ghost marker that is set to your personal best.
-- Press Esc to save your progress and return to the same batch later.
+- Press Esc to save your progress and return to the same batch later when you reopen the same PDF.
 - Practise without creating an account or uploading your files.
 
 ## Controls
 
 | Key | Action |
 | :--- | :--- |
-| Any character | Type the highlighted character |
+| Any character | Type a character and see whether it matches |
 | Enter | Start a new line |
 | Esc | Save your progress and quit |
 
@@ -100,11 +99,11 @@ When you press Esc, EscapeTypo saves your current batch, your best speed and you
 
 ## Project status
 
-The timer experience is still being refined. Suggestions, improvements and open-source contributions are welcome as the project continues to grow.
+The timer display is currently a placeholder while the experience is being refined. Suggestions, improvements and open-source contributions are welcome as the project continues to grow.
 
-## Windows build availability
+## Platform support
 
-Windows builds are currently available as unsigned development builds. This keeps the project easy to try while the release and signing process is being prepared. Depending on your Windows security settings, you may see an unknown-publisher or SmartScreen notice when opening a build. An official signed GitHub Release will be provided when that process is complete.
+EscapeTypo is a terminal application built with Rust, Crossterm and Ratatui. The repository does not currently include prebuilt release binaries; build it locally with Cargo on a supported Rust platform.
 
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:22D3EE,50:1D4ED8,100:0F172A&height=140&section=footer&text=Read.%20Type.%20Repeat.&fontSize=28&fontColor=F8FAFC&animation=twinkling" alt="Read. Type. Repeat." width="100%">
