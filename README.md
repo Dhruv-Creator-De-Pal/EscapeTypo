@@ -60,7 +60,9 @@ When you press Esc, EscapeTypo saves your current batch, your best speed and you
 
 ## A small note
 
-EscapeTypo is a focused tool. It does not create accounts, upload your files or require a network connection.
+I have left the timer part unchecked in case you want to add contribution and add Open Source contribution to resume this might help you 
+
+Thank you
 
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:22D3EE,50:1D4ED8,100:0F172A&height=140&section=footer&text=Read.%20Type.%20Repeat.&fontSize=28&fontColor=F8FAFC&animation=twinkling" alt="Read. Type. Repeat." width="100%">
